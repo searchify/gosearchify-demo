@@ -39,6 +39,38 @@ footer a:hover { color:white; text-decoration: none }
 .from { color: green; }
 .question { font-weight: bold; color:#002A80 }
 .answer { margin-bottom:20px;  }
+.rbtn.active {
+    color: rgba(255, 255, 255, 0.75);
+}
+.rbtn {
+    color: #ffffff;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+    background-color: #1C3A58;
+    *background-color: #0F253A;
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1C3A58), to(#0F253A));
+    background-image: -webkit-linear-gradient(top, #1C3A58, #0F253A);
+    background-image: -o-linear-gradient(top, #1C3A58, #0F253A);
+    background-image: linear-gradient(to bottom, #1C3A58, #0F253A);
+    background-image: -moz-linear-gradient(top, #1C3A58, #0F253A);
+    background-repeat: repeat-x;
+    border-color: #0F253A #0F253A #000000;
+    border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
+    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#ff1C3A58', endColorstr='#ff0F253A', GradientType=0);
+    filter: progid:dximagetransform.microsoft.gradient(enabled=false);
+}
+.rbtn:hover,
+.rbtn:active,
+.rbtn.active,
+.rbtn.disabled,
+.rbtn[disabled] {
+    color: #ffffff;
+    background-color: #0F253A;
+    *background-color: #151515;
+}
+.rbtn:active,
+.rbtn.active {
+    background-color: #080808 \9;
+}
 /* autocomplete mouseover cursor */
 a.ui-state-hover { cursor: pointer; }
 </style>
@@ -56,7 +88,7 @@ a.ui-state-hover { cursor: pointer; }
                 <form id="myform" class="form-inline form-search" action="/search">
                     <div class="input-append">
                         <input id="qry" type="text" class="span3 search-query xxinput-xlarge" name="q" value="{{ .Query | html}}" maxlength="250">
-                        <button type="submit" class="btn btn-inverse">Search Enron</button>
+                        <button type="submit" class="rbtn btn">Search Enron</button>
                     </div>
                     {{ if not .Homepage }}
                     <span style="margin-left:25px">
