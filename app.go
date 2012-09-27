@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"text/template"
 	"os"
-	"searchify/gotank/indextank"
+	"github.com/searchify/gotank/indextank"
 	"time"
 	"strconv"
 )
