@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>{{ .Title | html }}</title>
+<meta name="description" content="A Demo of Searchify&apos;s Go IndexTank client library searching the Enron email corpus. Searchify is a hosted search engine."/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="/static/favicon.ico">
+
+<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+<link rel="stylesheet" href="/static/css/bootstrap-responsive.min.css">
+<link type="text/css" rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/themes/flick/jquery-ui.css" media="all" />
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/jquery.indextank.ize.js"></script>
+<script src="/static/jquery.indextank.autocomplete.js"></script>
+<script src="/static/jquery.indextank.renderer.js"></script>
+<script>
+$(document).ready(function(){
+  $("#myform").indextank_Ize("http://dbajo.api.searchify.com", 'enron2');
+  $("#qry").indextank_Autocomplete( {fieldName: "text"});
+//var renderer =  $("#results").indextank_Renderer();
+//$("#query").indextank_Autocomplete().indextank_AjaxSearch( {listeners: renderer}).indextank_InstantSearch();
+//$("#qry").indextank_InstantLinks({name: "subject", fields: "subject,text", url:"subject", thumbnail:"subject"});
+{{ if .Homepage }}
+  $("#qry").focus();
+{{ end}}
+  $("#myform")[0].reset();
+});
+</script>
+
+<style type="text/css">
+body { margin-top:15px; }
+a { color:#003399; }
+.dym { font-style:italic; font-weight: bold; }
+footer { background:#1C3A58; margin-bottom:0; padding-bottom:0; border-top:1px solid #0F253A; }
+footer a:hover { color:white; text-decoration: none }
+.subj { font-weight: bold; color:#002a80;}
+.date { color:#666666;}
+.body { font-weight: normal; }
+.from { color: green; }
+.question { font-weight: bold; color:#002A80 }
+.answer { margin-bottom:20px;  }
+.sbtn { background-color: #1C3A58;
+    background-image: -moz-linear-gradient(top, #1C3A58, #0F253A);
+    background-image: -ms-linear-gradient(top, #1C3A58, #0F253A);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#1C3A58), to(#0F253A));
+    background-image: -webkit-linear-gradient(top, #1C3A58, #0F253A);
+    background-image: -o-linear-gradient(top, #1C3A58, #0F253A);
+    background-image: linear-gradient(top, #1C3A58, #0F253A);
+}
+/* autocomplete mouseover cursor */
+a.ui-state-hover { cursor: pointer; }
+</style>
+</head>
+<!--
+- links to:
+  - github code for this demo
+  - twitter.com/getsearchify
+  - google+
+  - golang.org
+  - github buttons - http://ghbtns.com/
+todo:
+- autocomplete, instant (?)
+- pagination
+- did-you-mean
+- gae demo
+-->
+
+<body>
+<a href="https://github.com/searchify/gotank"><img style="position: absolute; top: 0; right: 0; border: 0;"
+       src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>
+<div class="container">
+<div class="span11">
+    <!--<div class="container span12">-->
+        <div class="row">
+            <!--<div class=" morepadx">-->
+            <div class="span7">
+                <!--{{ if not .Homepage }}<a href="/">Home</a>{{ end }}-->
+                <h2 style="color:#0F253A">Searchify Go client demo</h2>
+
+                <form id="myform" class="form-inline form-search" action="/search">
+                    <div class="input-append">
+                        <input id="qry" type="text" class="span3 search-query xxinput-xlarge" name="q" value="{{ .Query | html}}" maxlength="250">
+                        <button type="submit" class="btn btn-inverse">Search Enron</button>
+                    </div>
+                    {{ if not .Homepage }}
+                    <span style="margin-left:25px">
+                        <a href="/">What is this?</a>
+                    </span>
+                    {{ end }}
+                </form>
+            </div>
+
+            <div class="pull-right span3 offset1">
+                <!--<form action="" class="pull-right">-->
+                    <!--<a href="https://twitter.com/share" class="twitter-share-button" data-url="http://github.com/searchify/gotank" data-text="A new Searchify IndexTank client for Go" data-via="getsearchify" data-size="large">Tweet</a>-->
+                    <!--<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>-->
+                <!--</form>-->
+                <a class="brand" target="_blank" href="http://www.searchify.com/"><img height="54" width="175" src="http://www.searchify.com/_static/common/images/searchify-175.png"></a>
+            </div>
+            <!--</div>-->
+        </div>
+    <!--</div>-->
+
+
+{{ if .Homepage }}
+    <!--
+      - github code for this demo
+      - heroku add-on
+  -->
+    <div class="row">
+    <div class=" span10">
+        <h4 class="question">What's this?</h4>
+        <div class="answer">
+            This is a small demo app demonstrating Searchify's <a target="_blank" href="http://golang.org/">Go language</a>
+            IndexTank client, called <a href="http://github.com/searchify/gotank">Gotank</a>.
+            <!--The source code for this demo app is at <a href="http://github.com/searchify/searchify-go-example">github.com/searchify/searchify-go-example</a>.-->
+        </div>
+
+        <h4 class="question">Just show me the code!</h4>
+        <div class="answer">
+            The Go source code for this demo app is at
+            <a href="http://github.com/searchify/searchify-go-example">github.com/searchify/searchify-go-example</a>.
+            The IndexTank client Go source is at <a href="http://github.com/searchify/gotank">Gotank</a>.
+        </div>
+
+        <h4 class="question">What data is this app searching?</h4>
+        <div class="answer">
+            For this demo, we're searching through the
+            <a target="_blank" href="http://en.wikipedia.org/wiki/Enron_Corpus">Enron email corpus</a>
+            which contains emails from 1999-2001 from the Enron case.
+        </div>
+
+        <h4 class="question">Where is this demo app running?</h4>
+        <div class="answer">
+            I'm glad you asked.  It's running on <a href="http://heroku.com/">Heroku</a>, using Keith Rarick's
+            excellent <a href="https://github.com/kr/heroku-buildpack-go">Go buildpack</a>, and using
+            Searchify to power the search.
+            <!--There's also a <a href="https://addons.heroku.com/searchify">Searchify Heroku add-on</a>.-->
+        </div>
+
+        <h4 class="question">What is Searchify?</h4>
+        <div class="answer">
+            <a href="http://www.searchify.com/">Searchify</a> provides hosted IndexTank search for websites and apps,
+            with features like autocomplete, geolocation search, faceted search, and custom ranking functions.
+        </div>
+
+        <h4 class="question">Does Searchify work with other languages?</h4>
+        <div class="answer">
+            Yep!  There are client libraries in many languages, including
+            <a href="http://www.searchify.com/documentation/ruby-client">Ruby</a>,
+            <a href="http://www.searchify.com/documentation/python-client">Python</a>,
+            <a href="http://www.searchify.com/documentation/java-client">Java</a>,
+            <a href="http://www.searchify.com/documentation/php-client">PHP</a>,
+            <a href="http://github.com/flaptor/indextank-jquery">Javascript</a>,
+            and 3rd party clients in several other languages.  And if you want to write your own client, it's pretty
+            easy, using our <a href="http://www.searchify.com/documentation/api">REST API</a>.
+        </div>
+
+        <h4 class="question">What now?</h4>
+        <div class="answer">
+        Try some searches!  Here are a few ideas to get you started:<br>
+        <ul>
+            <li><a href="/search?q=google+yahoo">google</a></li>
+            <li><a href="/search?q=aapl">aapl</a> - AAPL's stock price in 2001</li>
+            <li><a href="/search?q=%22September+11+2001%22">&quot;September 11 2001&quot;</a></li>
+        </ul>
+        </div>
+    </div>
+    </div>
+{{ else }}
+    {{ if and false .DidYouMean }}
+        <div class="dym">Did you mean: <a href="/search?q={{.DidYouMean | urlquery }}">{{ .DidYouMean }}</a> ?</div><br>
+    {{ end }}
+{{ if .Matches }}
+    <b>{{ .Matches }} Results found in {{.SearchTime}} seconds:</b><br><br>
+
+    {{ range .Facets }}
+       Facet {{ with $k := . }} {{ $k }} {{ end }}<br>
+    {{ end }}
+
+    {{range .Results}}
+    <p style="margin-bottom: 20px">
+    <span class="subj">{{ if .subject}}{{ .subject | html }}{{ else }}(No subject){{ end }}</span><br>
+    <span class="from">
+    {{ if .senderName }}
+        From {{ .senderName | html }} &lt;{{ .sender | html }}&gt;
+    {{ else }}
+        Empty sender field
+    {{ end }}
+    </span> <span class="pull-right date">{{ fmttime .timestamp | html }}</span>
+    <br>
+    <span class="body">
+    {{ if .snippet_text }}
+        {{ .snippet_text }}
+    {{ else }}
+        {{ maxlen .text 250 | html }}
+    {{ end }}
+    <!--- messageid {{ .messageid | html }}-->
+    <br>
+    </span>
+    </p>
+    {{end}}
+    <div class="pagination">
+        <ul class="pager">
+            {{ if .HasPrev }}<li class="previous"><a href="/search?q={{ .Query | urlquery}}&start={{ .PrevStart }}">Previous</a></li>{{ end }}
+            {{ if not .HasPrev }}<li class="previous disabled"><a href="#">Previous</a></li>{{ end }}
+            {{ if .HasNext }}<li class="next"><a href="/search?q={{ .Query | urlquery}}&start={{ .NextStart }}">Next</a></li>{{ end }}
+            {{ if not .HasNext }}<li class="next disabled"><a href="#">Next</a></li>{{ end }}
+        </ul>
+    </div>
+
+{{ else }}
+    <div>
+        No search results found for <b>{{ .Query | html }}</b><br><br>
+        Try one of these searches: ...<br><br>
+        <ul>
+            <li><a href="/search?q=google+yahoo">google yahoo</a></li>
+            <li><a href="/search?q=aapl">aapl</a> - AAPL's stock price in 2001</li>
+            <li><a href="/search?q=%22September+11+2001%22">&quot;September 11 2001&quot;</a></li>
+        </ul>
+    </div>
+{{ end }}
+{{ end }}
+    <br>
+    <!--<a href="http://jan.newmarch.name/golang/template/chapter-template.html">http://jan.newmarch.name/golang/template/chapter-template.html</a>-->
+    <br>
+</div>
+
+<div class="row" style="text-align:center">
+    <div class="span12">
+    <p>Visit <a href="http://www.searchify.com/">Searchify</a></p>
+    </div>
+    <iframe allowtransparency="true" frameborder="0" scrolling="no"
+            src="//platform.twitter.com/widgets/follow_button.html?screen_name=getsearchify&show_count=false"
+            style="width:300px; height:20px;"></iframe>
+    <span style="padding-left:10px">
+        <a href="//plus.google.com/110024621129534054730?prsrc=3" rel="publisher" style="text-decoration:none;">
+        <img src="//ssl.gstatic.com/images/icons/gplus-32.png" alt="Google+" style="border:0;width:32px;height:32px;"/></a>
+    </span>
+</div>
+
+</div>
+
+</body>
+</html>
